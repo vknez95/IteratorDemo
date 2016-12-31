@@ -9,10 +9,11 @@ namespace IteratorDemo
 {
     static class Program
     {
-        static IEnumerable<int> Populate(int max)
+        static IEnumerable<int> Populate()
         {
-            for (int i = 1; i <= max; i++)
-                yield return i;
+            int current = 0;
+            while (true)
+                yield return ++current;
         }
         static void Main()
         {
@@ -22,7 +23,7 @@ namespace IteratorDemo
             Stopwatch sw = Stopwatch.StartNew();
             int stopAt = 10000000;
 
-            foreach (int value in Populate(n))
+            foreach (int value in Populate())
             {
                 sum += value;
                 if (value % stopAt == 0)
@@ -32,6 +33,8 @@ namespace IteratorDemo
                                         GC.GetTotalMemory(false) / 1024 / 1024,
                                         sw.ElapsedMilliseconds);
                 }
+                if (value >= n)
+                    break;
             }
 
             long expectedSum = (long)n * ((long)n + 1) / 2;
