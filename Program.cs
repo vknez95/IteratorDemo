@@ -11,12 +11,8 @@ namespace IteratorDemo
     {
         static IEnumerable<int> Populate(int max)
         {
-            List<int> list = new List<int>();
-
             for (int i = 1; i <= max; i++)
-                list.Add(i);
-
-            return list;
+                yield return i;
         }
         static void Main()
         {
@@ -26,7 +22,7 @@ namespace IteratorDemo
             Stopwatch sw = Stopwatch.StartNew();
             int stopAt = 10000000;
 
-            foreach (int value in new Sequence(n))
+            foreach (int value in Populate(n))
             {
                 sum += value;
                 if (value % stopAt == 0)
