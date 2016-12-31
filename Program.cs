@@ -20,13 +20,13 @@ namespace IteratorDemo
         }
         static void Main()
         {
-            int n = 100000000;
+            int n = 1000000000;
             long sum = 0;
 
             Stopwatch sw = Stopwatch.StartNew();
             int stopAt = 10000000;
 
-            foreach (int value in Populate(n))
+            foreach (int value in new Sequence(n))
             {
                 sum += value;
                 if (value % stopAt == 0)
